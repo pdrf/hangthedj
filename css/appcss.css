@@ -1,0 +1,46 @@
+#gotopagetwo,
+#gotopageone,
+#addSongLink{
+	display:none;
+}
+
+th{
+	border-bottom: 1px solid #d6d6d6;
+}
+tr:nth-child(even){
+	background:#e9e9e9;
+}
+
+.ui-field-contain {
+    border-bottom: 0px;
+}
+
+.ui-page-theme-a .ui-btn:focus,
+html .ui-bar-a .ui-btn:focus,
+html .ui-body-a .ui-btn:focus,
+html body .ui-group-theme-a .ui-btn:focus,
+html head + body .ui-btn.ui-btn-a:focus,
+.ui-page-theme-a .ui-focus,
+html .ui-bar-a .ui-focus,
+html .ui-body-a .ui-focus, html body .ui-group-theme-a .ui-focus,
+html head + body .ui-btn-a.ui-focus,
+html head + body .ui-body-a.ui-focus{
+	box-shadow: 0 0 12px #E05E3E;
+}
+
+.ui-bar-a,
+.ui-page-theme-a .ui-bar-inherit,
+html .ui-bar-a .ui-bar-inherit,
+html .ui-body-a .ui-bar-inherit,
+html body .ui-group-theme-a .ui-bar-inherit{
+	background:#E05E3E;
+}
+
+.ui-title {
+	opacity: 0.4;
+}
+
+.ui-popup-screen.in{
+	background-color: black;
+	opacity: 0.25;
+}

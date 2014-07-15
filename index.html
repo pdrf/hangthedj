@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- saved from url=(0064)https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html -->
+<html class="ui-mobile"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><!--<base href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html">--><base href=".">
+	<title>Hang The DJ</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/plugins/jquery.mobile/jquery.mobile-1.4.2.css">
+  <link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/plugins/dataTables/media/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/css/appcss.css">
+	<script src="./index_files/jquery.js"></script>
+	<script src="./index_files/jquery.mobile-1.4.2.js"></script>
+  <script src="./index_files/jquery.dataTables.min.js"></script>
+	<script src="./index_files/appjs.js"></script>
+</head>
+<body class="ui-mobile-viewport ui-overlay-a">
+
+<div data-role="page" id="pageone" data-url="pageone" tabindex="0" class="ui-page ui-page-theme-a ui-page-active" style="min-height: 108px;">
+  <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+    <h1 class="ui-title" role="heading" aria-level="1">Hang The DJ</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+  	<div data-role="fieldcontain" class="ui-field-contain">
+    	<form class="ui-filterable"><div class="ui-input-search ui-shadow-inset ui-input-has-clear ui-body-d ui-corner-all"><input data-type="search" placeholder="search..."><a href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html#" class="ui-input-clear ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all ui-input-clear-hidden" title="Clear text">Clear text</a></div></form><ul id="search" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="search..." data-filter-theme="d" class="ui-listview ui-listview-inset ui-corner-all ui-shadow"></ul>
+	</div>
+	<div id="tableContainer" data-role="listview" class="ui-listview">
+	</div>
+    <a id="gotopagetwo" href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html#pagetwo" data-transition="slidefade" class="ui-link">what's on</a>
+    <a id="addSongLink" href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html#addSong" data-rel="popup" data-position-to="window" data-transition="fade" class="ui-btn ui-corner-all ui-shadow ui-btn-inline" aria-haspopup="true" aria-owns="addSong" aria-expanded="false"></a>
+  </div>
+    <div style="display: none;" id="addSong-placeholder"><!-- placeholder for addSong --></div>
+<div class="ui-screen-hidden ui-popup-screen ui-overlay-inherit" id="addSong-screen"></div><div class="ui-popup-container ui-popup-hidden ui-popup-truncate" id="addSong-popup"><div data-role="popup" id="addSong" class="ui-popup ui-body-inherit ui-overlay-shadow ui-corner-all">
+      <div data-role="header" role="banner" class="ui-header ui-bar-inherit">
+        <h1 class="ui-title" role="heading" aria-level="1">Add Song</h1>
+      </div>
+
+      <div data-role="main" class="ui-content">
+        <h2>Add this song to the playlist?</h2>
+        <p></p>
+        <a href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-plus ui-btn-icon-left" data-rel="plus">Add</a>
+        <a href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html#" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b ui-icon-back ui-btn-icon-left" data-rel="back">Cancel</a>
+      </div>
+    </div></div></div>
+
+<div data-role="page" id="pagetwo" data-url="pagetwo">
+  <div data-role="header">
+    <h1>Cur. Playlist</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>Nothing Playing</p>
+    <a id="gotopageone" href="https://dl.dropboxusercontent.com/u/3545379/hangTheDJ/index.html#pageone" data-transition="slidefade" data-direction="reverse">back to search</a>
+  </div>
+</div> 
+
+<div class="ui-loader ui-corner-all ui-body-a ui-loader-default"><span class="ui-icon-loading"></span><h1>loading</h1></div></body></html>
