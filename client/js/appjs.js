@@ -24,7 +24,7 @@ $(document).bind('pageinit', function(){
 	//adds song to spotify playlist
 	$("#popAddSong").click(function(event){
 		$("#popupMenu").popup("close");
-		alert('A música vai tocar... um dia!!! ' + $("#popName").text());
+		alert('The music will play.. someday ' + $("#popName").text());
 		return false;
 	})
 
