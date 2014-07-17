@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hang The DJ</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="plugins/jquery.mobile/jquery.mobile-1.4.2.css">
+  <link rel="stylesheet" href="plugins/dataTables/media/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="css/appcss.css">
+	<script src="plugins/jquery.mobile/jquery.js"></script>
+	<script src="plugins/jquery.mobile/jquery.mobile-1.4.2.js"></script>
+  <script src="plugins/dataTables/media/js/jquery.dataTables.min.js"></script>
+	<script src="js/appjs.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="pageone">
+  <div data-role="header">
+    <h1>Hang The DJ</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+  	<div data-role="fieldcontain">
+    	<ul id="search" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="search..." data-filter-theme="d"></ul>
+	</div>
+	<div id="tableContainer" data-role='listview'>
+	</div>
+    <a id="gotopagetwo" href="#pagetwo" data-transition="slidefade">what's on</a>
+  </div>
+  
+  <div data-role="popup" id="popupMenu" data-theme="d">
+      <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="d">
+        <li id="popName" data-role="divider" data-theme="e">Choose an action</li>
+        <li><a id="popAddSong" href="#">Add Song</a></li>
+        <li><a id="popClose" href="#">Cancel</a></li>
+      </ul>
+  </div>
+</div>
+
+<div data-role="page" id="pagetwo">
+  <div data-role="header">
+    <h1>Cur. Playlist</h1>
+  </div>
+
+  <div data-role="main" class="ui-content">
+    <p>Nothing Playing</p>
+    <a id="gotopageone" href="#pageone" data-transition="slidefade" data-direction="reverse">back to search</a>
+  </div>
+</div> 
+</body>
+</html>
