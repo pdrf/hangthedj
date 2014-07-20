@@ -1,4 +1,8 @@
 var app = {};
+var card = {client_id:"130780f8dab64cf987437469c00ab6a2",
+			client_secret:"7ec55499f13f48059ae24fc7866a9eab",
+			user_id:"spotdevuser",
+			user_pwd:"aveiro14"};
 
 $(document).bind('pageinit', function(){
 //$(document).ready(function(){
@@ -21,13 +25,17 @@ $(document).bind('pageinit', function(){
 	$("#popClose").click(function(){
 		$("#popupMenu").popup("close");
 	})
+	
+	//POST https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks?uris={uris}
+	//"https://api.spotify.com/v1/users/wizzler/playlists/7oi0w0SLbJ4YyjrOxhZbUv/tracks"
+	//-H "Authorization: Bearer {your access token}" 
+	//-H "Content-Type: application/json" --data "[\"spotify:track:4iV5W9uYEdYUVa79Axb7Rh\", \"spotify:track:1301WleyT98MSxVHPZCA6M\"]"
 	//adds song to spotify playlist
 	$("#popAddSong").click(function(event){
 		$("#popupMenu").popup("close");
-		alert('The music will play.. someday ' + $("#popName").text());
-		return false;
+		var song_id = $("#popName").attr('songId');
+		console.log($("#popName").attr('songId'))
 	})
-
 });
 
 //gets and handles the responses from the search
@@ -89,6 +97,6 @@ app.popInfo = function(elem){
 	var id = $(elem).attr('id'),
 		music = $(elem).attr('music'),
 		artist= $(elem).attr('artist');
-	console.log(id);
 	$("#popName").html(music+' by '+artist);
+	$("#popName").attr("songId",id);
 } 
