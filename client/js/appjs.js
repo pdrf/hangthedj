@@ -1,13 +1,4 @@
 var app = {};
-var card = {client_id:"130780f8dab64cf987437469c00ab6a2",
-            client_secret:"7ec55499f13f48059ae24fc7866a9eab",
-            user_id:"spotdevuser",
-            user_pwd:"aveiro14",
-            redirect_uri:"",
-            access_token:"BQArO9fFXu0q9qUCOs-7BUnPZD_StGDceuZ1wkoMlnae7cMBZ6MEFe8IV3NBjK10J7s0xZQVi3yr32xQeQFxLDWzm2Xos2WNAL5Jowz_g4tJCGV_q8E4h_E-3IHCYGN3_iNJx_lCu7SK-uNXhsMex4DNU54ktbu_V2AF1oKn3qsGLq069g_fjVndNhsPf01qVQq_16UoLOcg4i9xBQ",
-            playlist:"1gDcMvi8daManFexydRIDV"
-            };
-
 $(document).bind('pageinit', function(){
 //$(document).ready(function(){
 
@@ -30,24 +21,17 @@ $(document).bind('pageinit', function(){
 		$("#popupMenu").popup("close");
 	})
 	
-	//POST https://api.spotify.com/v1/users/{user_id}/playlists/{playlist_id}/tracks?uris={uris}
-	//"https://api.spotify.com/v1/users/wizzler/playlists/7oi0w0SLbJ4YyjrOxhZbUv/tracks"
-	//-H "Authorization: Bearer {your access token}" 
-	//-H "Content-Type: application/json" --data "[\"spotify:track:4iV5W9uYEdYUVa79Axb7Rh\", \"spotify:track:1301WleyT98MSxVHPZCA6M\"]"
-	//adds song to spotify playlist
 	$("#popAddSong").click(function(event){
 		$("#popupMenu").popup("close");
 		var song_id = $("#popName").attr('songId');
 		$.ajax({
-			type: "POST",    
-    		url: 'https://api.spotify.com/v1/users/' + card.user_id + '/playlists/'+card.playlist+'/tracks?uris='+song_id,
-    		headers: {
-    		    'Authorization': 'Bearer ' + card.access_token
-    		},
-    		success: function(response) {
-    		    console.log(response);
-    		}
-		});
+        	url: 'http://192.168.1.2:9999',
+        	data: {
+        	  'function': 'addMusic',
+        	  'song_id': song_id
+        	},
+        	json: true
+        })
 	})
 });
 

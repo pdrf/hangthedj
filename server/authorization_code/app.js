@@ -6,13 +6,8 @@
  * For more information, read
  * https://developer.spotify.com/web-api/authorization-guide/#authorization_code_flow
  */
-
-var card = {client_id:"130780f8dab64cf987437469c00ab6a2",
-      client_secret:"7ec55499f13f48059ae24fc7866a9eab",
-      user_id:"spotdevuser",
-      user_pwd:"aveiro14",
-      redirect_uri: "http://localhost:8888/callback"};
-
+require('./properties.js')
+require('./spotify.js')
 var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
@@ -21,7 +16,7 @@ var cookieParser = require('cookie-parser');
 var client_id = card.client_id; // Your client id
 var client_secret = card.client_secret; // Your client secret
 var redirect_uri = card.redirect_uri; // Your redirect uri
-
+var refresh = '';
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -50,8 +45,8 @@ app.get('/login', function(req, res) {
   res.cookie(stateKey, state);
 
   // your application requests authorization
-//  var scope = 'playlist-modify-public playlist-modify-private playlist-read-private streaming user-read-private user-read-email';
-  var scope = '';
+  var scope = 'playlist-modify-public playlist-modify-private playlist-read-private streaming user-read-private user-read-email';
+  //var scope = '';
   res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
       response_type: 'code',
@@ -60,6 +55,9 @@ app.get('/login', function(req, res) {
       redirect_uri: redirect_uri,
       state: state
     }));
+
+
+
 });
 
 app.get('/callback', function(req, res) {
@@ -95,7 +93,8 @@ app.get('/callback', function(req, res) {
 
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
-
+        refresh = refresh_token;
+        card.access  = access_token;
         var options = {
           url: 'https://api.spotify.com/v1/me',
           headers: { 'Authorization': 'Bearer ' + access_token },
@@ -104,7 +103,8 @@ app.get('/callback', function(req, res) {
 
         // use the access token to access the Spotify Web API
         request.get(options, function(error, response, body) {
-          console.log(body);
+          //console.log(body);
+          //console.log('refresh_token', refresh)
         });
 
         // we can also pass the token to the browser to make requests from there
@@ -124,9 +124,9 @@ app.get('/callback', function(req, res) {
 });
 
 app.get('/refresh_token', function(req, res) {
-
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
+  refresh = refresh_token;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
@@ -140,6 +140,7 @@ app.get('/refresh_token', function(req, res) {
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       var access_token = body.access_token;
+      card.access = access_token;
       res.send({
         'access_token': access_token
       });
@@ -148,4 +149,4 @@ app.get('/refresh_token', function(req, res) {
 });
 
 console.log('Listening on 8888');
-app.listen(8888);
+app.listen(8888, "0.0.0.0")
