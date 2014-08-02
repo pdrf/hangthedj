@@ -16,12 +16,12 @@ var cookieParser = require('cookie-parser');
 var client_id = card.client_id; // Your client id
 var client_secret = card.client_secret; // Your client secret
 var redirect_uri = card.redirect_uri; // Your redirect uri
-var refresh = '';
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
+
 var generateRandomString = function(length) {
   var text = '';
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -93,7 +93,7 @@ app.get('/callback', function(req, res) {
 
         var access_token = body.access_token,
             refresh_token = body.refresh_token;
-        refresh = refresh_token;
+        card.refresh = refresh_token;
         card.access  = access_token;
         var options = {
           url: 'https://api.spotify.com/v1/me',
@@ -126,7 +126,7 @@ app.get('/callback', function(req, res) {
 app.get('/refresh_token', function(req, res) {
   // requesting access token from refresh token
   var refresh_token = req.query.refresh_token;
-  refresh = refresh_token;
+  card.refresh = refresh_token;
   var authOptions = {
     url: 'https://accounts.spotify.com/api/token',
     headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
