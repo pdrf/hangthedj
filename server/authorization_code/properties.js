@@ -5,7 +5,9 @@ global.card = {
             user_pwd:"aveiro14",
             redirect_uri:"http://localhost:8888/callback",
             access_token:"AQCZ6IVIesg779OlxgGuTjgwNG0SjriVl4WobcZum4b_qAAwOGN6pnQR1WgKEiodVPhvh4fllHKWTTcYhGWrjzTaG766e7s1JJGKFa41NkMKUPohUNAr1H7JcpjXD7kgjvkF7hFxAUBiW3RXwcnpLBW29lBc3Tmp6u54fmyjdM2aPNKh4jFO85gyZw",
-            playlist:"1gDcMvi8daManFexydRIDV",
+            playlistID:"",
+            songID:"",
+            spotilocal:"http://www.spotilocal.com:4382/remote",
             access:"BQDR6p2SWiwBXiHSo2GzqoAc-KMwX95vcekn_XEKpfJLnwgrCtc0jRHG37X2PXREwA2DjMinsGeN534yfnzLn7jGNF_mn3Ht9aNG6oYFi0xBxZ28uJfFnJtZPP6VXV2Gu_fF1oJozwcp4IJ8_NOF3BXqbmQS0htietaTp_WS8mucSR8q-XR5LSVBmnqd-fY294RqiLhDqv1pFzdVKg",
             refresh:"AQAGPaGcpMqg_wYQHv4PGsZ065FuCTLemjWBxah6JZG4YHD4zoblgOBx5ZHV0FEzOKJLe8dSWegoajZxlv1rygZksalKkMXyQ_PW75RXYf0n5owbhawONBWN5RnhhOBsWXA"
             };

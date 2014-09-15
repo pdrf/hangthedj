@@ -12,7 +12,6 @@ var express = require('express'); // Express web server framework
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-
 var client_id = card.client_id; // Your client id
 var client_secret = card.client_secret; // Your client secret
 var redirect_uri = card.redirect_uri; // Your redirect uri
