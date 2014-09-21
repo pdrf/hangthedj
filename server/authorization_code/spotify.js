@@ -18,7 +18,7 @@ spotify.addMusic = function(song_id){
 }
 
 /*
-Verifies if our playlist already exists. Delegates functions whether or not.
+Verifies if our playlist already exists
 */
 spotify.getplaylists = function(callback){
     var authOptions = {
@@ -151,6 +151,9 @@ spotify.deleteTracks = function(){
   })
 }
 
+/*
+Get all tracks info in playlist
+*/
 spotify.getplaylistItems = function(callback){
   var authOptions = {
       url: 'https://api.spotify.com/v1/users/' + card.user_id + '/playlists/'+card.playlist_id,
