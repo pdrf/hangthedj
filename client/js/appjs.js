@@ -25,12 +25,14 @@ $(document).bind('pageinit', function(){
 		$("#popupMenu").popup("close");
 		var song_id = $("#popName").attr('songId');
 		$.ajax({
-        	url: 'http://192.168.1.2:9999',
+        	url: 'http://127.0.0.1:9999',
         	data: {
         	  'function': 'addMusic',
         	  'song_id': song_id
         	},
         	json: true
+        }).done(function(data){
+        	console.log(data);
         })
 	})
 });
