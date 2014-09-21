@@ -96,7 +96,7 @@ spotify.startPlaylist = function(song_id){
           clearInterval(check);
         }
       });
-    }, 2000);
+    }, 1000);
   })
 }
 
@@ -129,7 +129,7 @@ spotify.deleteTracks = function(){
   var todelete = '{"tracks":[';
   spotify.getplaylistItems(function(tracks) {
     var o = tracks.items;
-      if(o.length===1){
+      if(o.length>0){
       for (var prop in o) {
         if(o.hasOwnProperty(prop)) {
           todelete+='{"uri":"'+o[prop].track.uri+'"},';
