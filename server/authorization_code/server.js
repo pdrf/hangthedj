@@ -15,8 +15,6 @@ http.createServer(function (req, res) {
 	var query = url_parts.query;
 	var funcstr = query.function;
 	spotify[funcstr](query.song_id);
-
-  res.end();
-
+	res.end();
 }).listen(9999, "127.0.0.1");
 console.log('Listening on 9999');

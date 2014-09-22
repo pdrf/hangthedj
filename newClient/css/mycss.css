@@ -1,0 +1,113 @@
+body  {
+    margin: 0; 
+    padding: 0;
+    text-align: center;
+}
+
+.search{
+	width: 80%;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#title{
+	font: 45px 'archisticobold', arial, sans-serif;
+	color:#0C95F3;
+	text-align: center;
+}
+
+.searchBox{
+	width: 100%;
+}
+
+@font-face {
+    font-family: 'archisticobold';
+    src: url('../fonts/Archistico_Bold-webfont.eot');
+    src: url('../fonts/Archistico_Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Archistico_Bold-webfont.woff') format('woff'),
+         url('../fonts/Archistico_Bold-webfont.ttf') format('truetype'),
+         url('../fonts/Archistico_Bold-webfont.svg#archisticobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+input[type="text"] {
+  display: block;
+  margin: 0;
+  width: 100%;
+  font-family: sans-serif;
+  font-size: 18px;
+  appearance: none;
+  box-shadow: none;
+  border-radius: none;
+}
+input[type="text"]:focus {
+  outline: none;
+}
+
+.search input[type="text"] {
+  padding: 10px;
+  padding-bottom: 0px;
+  border: none;
+  border-bottom: solid 2px #c9c9c9;
+  transition: border 0.3s;
+}
+.search input[type="text"]:focus,
+.search input[type="text"].focus {
+  border-bottom: solid 2px #969696;
+}
+
+.ui-autocomplete-loading {
+	background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+
+.ui-autocomplete {
+	max-height: 300px;
+	max-width: 355px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+* html .ui-autocomplete {
+	height: 300px;
+	width: 355px;
+}
+
+.ui-menu-item{
+	font-size: 12px;
+	font-family: sans-serif;
+}
+
+h1,h2,h3,h4{
+  font-family: ‘Courier New’, Courier, monospace;
+}
+
+/* start da css for da buttons */
+.btn {
+  display: none;
+  border-radius: 5px;
+  padding: 15px 25px;
+  font-size: 15px;
+  font-family: ‘Courier New’, Courier, monospace;
+  text-decoration: none;
+  margin: 20px;
+  color: #fff;
+  position: relative;
+  border-width: 3px;
+}
+
+.blue {
+  background-color: #55acee;
+  box-shadow: 0px 5px 0px 0px #3C93D5;
+}
+
+#songid{
+  display:none;
+}
+
+#msg{
+  padding:50px;
+}
