@@ -1,27 +1,30 @@
 var app={};
 
+function _resizeMenu() {
+     console.log("gdgdggddgd")
+     var ul = this.menu.element;
+     ul.outerWidth(this.element.outerWidth());
+}
+
+
  $(function() {
-
  	$("#title").fitText(0.6);
-
-	var cache = {};
 	$( ".searchBox").autocomplete({
 		minLength: 3,
 		autoFocus: true,
-		position: { my : "center top", at: "center bottom" },
+		open: function( event, ui ) {
+			$( ".ui-autocomplete").outerWidth($(this).outerWidth())	;
+		},
 		select: function( event, ui ) {
 			var id = ui.item.value;
 			ui.item.value = '';
 			app.clean();
 			$('#songid').text(ui.item.id);
+			$('.searchBox').blur();
 			app.getTrack(id);
 		},
 		source: function( request, response ) {
 			var term = request.term;
-			if ( term in cache ) {
-				response( cache[ term ] );
-			return;
-			}
  			$.ajax({
 				url: 'https://api.spotify.com/v1/search',
       				data: {
@@ -31,11 +34,10 @@ var app={};
       				},
 			}).then( function ( data ) {
 				var JSONdata = app.getResultJSON(data)
-				cache[ term ] = JSONdata;
 				response( JSONdata );
 			})
 		}
-	});
+	})
 	$(".btn").click(function(event){
 		var song_id = $("#songid").text();
 		$.ajax({

@@ -64,7 +64,6 @@ input[type="text"]:focus {
 
 .ui-autocomplete {
 	max-height: 300px;
-	max-width: 355px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
@@ -73,7 +72,6 @@ input[type="text"]:focus {
 */
 * html .ui-autocomplete {
 	height: 300px;
-	width: 355px;
 }
 
 .ui-menu-item{
@@ -109,5 +107,5 @@ h1,h2,h3,h4{
 }
 
 #msg{
-  padding:50px;
+  padding-top:50px;
 }
