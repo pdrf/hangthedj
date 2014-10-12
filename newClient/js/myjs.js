@@ -1,15 +1,8 @@
 var app={};
 
-function _resizeMenu() {
-     console.log("gdgdggddgd")
-     var ul = this.menu.element;
-     ul.outerWidth(this.element.outerWidth());
-}
-
-
  $(function() {
  	$("#title").fitText(0.6);
-	$( ".searchBox").autocomplete({
+	$( ".searchBox").autocomplete({ 
 		minLength: 3,
 		autoFocus: true,
 		open: function( event, ui ) {
@@ -48,8 +41,8 @@ function _resizeMenu() {
         	},
         	json: true
         }).done(function(data){
+        	app.getPlaylist();
         })
-        app.getPlaylist();
 	})
 });
 
@@ -97,16 +90,50 @@ app.getTrack = function(id){
 
 app.getPlaylist = function(){
 	app.clean();
-	$('#imageholder').append('<h2 id="msg">music added. enjoy!</h2>');
-	$("#msg").fadeOut(2000, 'linear', function(){
-		$('#imageholder').empty();
-	});
+	$.ajax({
+       	url: 'http://127.0.0.1:9999',
+       	data: {
+       	  'function': 'getplaylistItems',
+       	  'song_id': 'song_id'
+       	}
+       }).done(function(strdata){
+       		var html = '<ul>';
+       		var data = jQuery.parseJSON(strdata);
+       		var	noImg = {
+				url:"css/images/nocover.jpeg",
+				width:64,
+				height:64
+			}
+       		for(var i=0;i<data.items.length;i++){
+       			var obj = data.items[i],
+       			img = (obj.track.album.images[2] === undefined) ? noImg : obj.track.album.images[2],
+       			artist= obj.track.artists[0].name,
+        		music = obj.track.name,
+        		album = obj.track.album.name;
+        		html+='<li>'+music+' - '+artist+' - '+album+'</li>';
+    		}
+    		html+='</ul>';
+			//var img = (data.album.images[2] === undefined) ? noImg : data.album.images[2],
+			//artist=data.artists[0].name,
+     		//music=data.name,
+     		//album =data.album.name,
+     		//info = '<h3>'+music+'</h3><h4>'+artist+'</h4>',
+			//imghtml = '</div><img src="'+img.url+'" alt="Album Cover" style="padding:10px;width:'+img.width+'px;height:'+img.height+'px">';
+			//console.log(imghtml)
+			//console.log(info)
+			$('#imageholder').append(html);
+			//$('#trackinfo').append(info);
+    	})
 }
 
 app.clean = function(){
 	$('#imageholder').empty();
 	$('#trackinfo').empty();
 	$('.btn').hide();
+}
+
+app.jsload = function(){
+	document.body.style.visibility='visible';
 }
 
 
