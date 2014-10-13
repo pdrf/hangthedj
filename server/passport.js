@@ -6,25 +6,8 @@ var	request = require('request'); // "Request" library
 responsible for refreshing the authorization token so the application can communicate and 'give orders'
 */
 passport.refreshToken = function(){
-var authOptions = {
-    url: 'https://accounts.spotify.com/api/token',
-    headers: { 'Authorization': 'Basic ' + (new Buffer(card.client_id + ':' + card.client_secret).toString('base64')) },
-    form: {
-      grant_type: 'refresh_token',
-      refresh_token: card.refresh
-    },
-    json: true
-  };
-  request.post(authOptions, function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      var access_token = body.access_token;
-      card.access = access_token;
-	}
-	console.log('access token refreshed: ', card.access);
-  	passport.getSpotilocal();
-  	passport.getoauth();
-  	spotify.checkPlaylist();
-	})
+  passport.getSpotilocal();
+  passport.getoauth();
 };
 
 /*
@@ -89,4 +72,4 @@ passport.getoauth = function(){
 
 
 passport.refreshToken(); //asks for access token at the beggining
-var autoToken=setInterval(function(){passport.refreshToken()},900000); //keeps refreshing access token every 15min
+var autoToken=setInterval(function(){passport.refreshToken()},1800000); //keeps refreshing access token every 30min

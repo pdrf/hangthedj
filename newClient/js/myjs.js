@@ -9,12 +9,11 @@ var app={};
 			$( ".ui-autocomplete").outerWidth($(this).outerWidth())	;
 		},
 		select: function( event, ui ) {
-			var id = ui.item.value;
-			ui.item.value = '';
+			var id = ui.item.id;
 			app.clean();
-			$('#songid').text(ui.item.id);
 			$('.searchBox').blur();
 			app.getTrack(id);
+			clearInterval(app.check);
 		},
 		source: function( request, response ) {
 			var term = request.term;
@@ -32,16 +31,18 @@ var app={};
 		}
 	})
 	$(".btn").click(function(event){
-		var song_id = $("#songid").text();
+		$(this).attr("disabled", true);
 		$.ajax({
         	url: 'http://127.0.0.1:9999',
         	data: {
         	  'function': 'addMusic',
-        	  'song_id': song_id
+        	  'song_id': JSON.stringify(app.music)
         	},
         	json: true
         }).done(function(data){
         	app.getPlaylist();
+        	$('.searchBox').val('');
+        	app.music = {};
         })
 	})
 });
@@ -54,13 +55,11 @@ app.getResultJSON = function(data){
       	var music=this.name;
       	var album  = this.album.name;
       	id =this.id;
-      	uri= 'spotify:track:'+id;
       	label = music+' - '+artist+' - '+album;
-      	value = music+' '+artist+' '+album;
       	var elem = {
-      		'id' : uri,
+      		'id' : id,
       		'label' : label,
-      		'value' : id
+      		'value' : label
       	}
 		dataSet.push(elem)
 	});
@@ -73,10 +72,16 @@ app.getTrack = function(id){
 		width:300,
 		height:300
 	}
+	var smallNoImg = {
+		url:"css/images/nocover.jpeg",
+		width:64,
+		height:64		
+	}
 	$.ajax({
 		url: 'https://api.spotify.com/v1/tracks/'+id
 	}).then( function ( data ) {
 		var img = (data.album.images[1] === undefined) ? noImg : data.album.images[1],
+		smallimg = (data.album.images[2] === undefined) ? smallNoImg : data.album.images[2],
 		artist=data.artists[0].name,
       	music=data.name,
       	album =data.album.name,
@@ -84,46 +89,30 @@ app.getTrack = function(id){
 		imghtml = '</div><img src="'+img.url+'" alt="Album Cover" style="padding:10px;width:'+img.width+'px;height:'+img.height+'px">';
 		$('#imageholder').append(imghtml);
 		$('#trackinfo').append(info);
-		$('.btn').show();
+		$('.btn').show().removeAttr("disabled");
+		app.music = {
+			artist: artist,
+			music: music,
+			album: album,
+			smallimg: smallimg,
+			song_id: data.uri
+		}
 	})
 }
 
 app.getPlaylist = function(){
-	app.clean();
-	$.ajax({
-       	url: 'http://127.0.0.1:9999',
-       	data: {
-       	  'function': 'getplaylistItems',
-       	  'song_id': 'song_id'
-       	}
-       }).done(function(strdata){
-       		var html = '<ul>';
-       		var data = jQuery.parseJSON(strdata);
-       		var	noImg = {
-				url:"css/images/nocover.jpeg",
-				width:64,
-				height:64
-			}
-       		for(var i=0;i<data.items.length;i++){
-       			var obj = data.items[i],
-       			img = (obj.track.album.images[2] === undefined) ? noImg : obj.track.album.images[2],
-       			artist= obj.track.artists[0].name,
-        		music = obj.track.name,
-        		album = obj.track.album.name;
-        		html+='<li>'+music+' - '+artist+' - '+album+'</li>';
-    		}
-    		html+='</ul>';
-			//var img = (data.album.images[2] === undefined) ? noImg : data.album.images[2],
-			//artist=data.artists[0].name,
-     		//music=data.name,
-     		//album =data.album.name,
-     		//info = '<h3>'+music+'</h3><h4>'+artist+'</h4>',
-			//imghtml = '</div><img src="'+img.url+'" alt="Album Cover" style="padding:10px;width:'+img.width+'px;height:'+img.height+'px">';
-			//console.log(imghtml)
-			//console.log(info)
-			$('#imageholder').append(html);
-			//$('#trackinfo').append(info);
+	app.check=setInterval(function () {
+		app.clean();
+		$.ajax({
+       		url: 'http://127.0.0.1:9999',
+       		data: {
+       	  	'function': 'getplaylistItems',
+       	  	'song_id': 'song_id'
+       		}
+       	}).done(function(strdata){
+			$('#imageholder').append(strdata);
     	})
+     }, 1000);
 }
 
 app.clean = function(){
@@ -135,6 +124,8 @@ app.clean = function(){
 app.jsload = function(){
 	document.body.style.visibility='visible';
 }
+
+app.music = {};
 
 
 
