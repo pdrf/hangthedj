@@ -22,7 +22,8 @@ var app={};
       				data: {
       				    q: term+'*',
       				    type: 'track',
-      				    limit: 50
+      				    limit: 50,
+      				    market: 'PT'
       				},
 			}).then( function ( data ) {
 				var JSONdata = app.getResultJSON(data)
