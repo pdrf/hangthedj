@@ -78,7 +78,7 @@ Get all tracks info in playlist
 spotify.getplaylistItems = function(song_id,callback){
   var html = '<ul>';
   for (var a in card.playing) {
-    html+='<li><p></p><strong>Playing...</strong></li>'
+    html+='<li><p></p><strong>playing...</strong></li>'
     if(card.playing.hasOwnProperty(a)) {
       //html+='<li><img src="'+card.playing[a].smallimg.url+'" alt="'+card.playing[a].album+'" width="'+card.playing[a].smallimg.width+'px" height="'+card.playing[a].smallimg.height+'px">'+card.playing[a].music+' by '+card.playing[a].artist+' from '+card.playing[a].album+'</li>'
       html+='<li>'+card.playing[a].music+' by '+card.playing[a].artist+' from '+card.playing[a].album+'</li>'
@@ -87,14 +87,14 @@ spotify.getplaylistItems = function(song_id,callback){
   for (var b in card.curPlaylist) {
     if(card.curPlaylist.hasOwnProperty(b)) {
       //html+='<li><img src="'+card.curPlaylist[b].smallimg.url+'" alt="'+card.curPlaylist[b].album+'" width="'+card.curPlaylist[b].smallimg.width+'px" height="'+card.curPlaylist[b].smallimg.height+'px">'+card.curPlaylist[b].music+' by '+card.curPlaylist[b].artist+' from '+card.curPlaylist[b].album+'</li>'
-      if(b == 0) { html+='<p></p><li><strong>Next on Playlist...</strong></li>' };
+      if(b == 0) { html+='<p></p><li><strong>next on playlist...</strong></li>' };
       html+='<li>'+card.curPlaylist[b].music+' by '+card.curPlaylist[b].artist+' from '+card.curPlaylist[b].album+'</li>'
 
   }}
   for (var c in card.oldPlaylist) {
     if(card.oldPlaylist.hasOwnProperty(c)) {
       //html+='<li><img src="'+card.oldPlaylist[c].smallimg.url+'" alt="'+card.oldPlaylist[c].album+'" width="'+card.oldPlaylist[c].smallimg.width+'px" height="'+card.oldPlaylist[c].smallimg.height+'px">'+card.oldPlaylist[c].music+' by '+card.oldPlaylist[c].artist+' from '+card.oldPlaylist[c].album+'</li>'
-      if(c == 0) { html+='<p></p><li><strong>Played Later Today...</strong></li>' };
+      if(c == 0) { html+='<p></p><li><strong>played today...</strong></li>' };
       html+='<li>'+card.oldPlaylist[c].music+' by '+card.oldPlaylist[c].artist+' from '+card.oldPlaylist[c].album+'</li>'
   }}
 
