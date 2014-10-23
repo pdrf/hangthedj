@@ -3,9 +3,10 @@ require('./passport.js')
 require('./spotify.js')
 
 var http = require('http'),
+sys = require ('sys'),
 url = require('url'),
+qs = require('querystring'),
 request = require('request'); // "Request" library
-
 
 /*
 Creates and starts the server
@@ -27,14 +28,38 @@ var server = http.createServer(
 			return( response.end() );
 		}
 		var requestBodyBuffer = [];
+		var body='';
 		request.on(
 			"data",
 			function( chunk ){
 				requestBodyBuffer.push( chunk );
+				body +=chunk;
+				
 			});
 		request.on(
 			"end",
 			function(){
+				if(request.method=='POST'){
+				var data = qs.parse(body);
+				var song_id = data.song_id;
+				var funcstr = data.function;
+				spotify[funcstr](song_id,function(msg){
+					var requestBody = requestBodyBuffer.join( "" );
+					var responseBody = (
+						msg+"\n\n" +
+						requestBody);
+					response.writeHead(
+						"200",
+						"OK",
+						{
+							"access-control-allow-origin": origin,
+							"content-type": "text/plain",
+							"content-length": responseBody.length
+						});
+					return( response.end( responseBody ) );
+
+				});
+			}else{
 				var url_parts = url.parse(request.url, true);
 				var query = url_parts.query;
 				var funcstr = query.function;
@@ -54,6 +79,8 @@ var server = http.createServer(
 					return( response.end( responseBody ) );
 
 				});
+			}
+
 			});
 	});
 // Bind the server to port 8080.

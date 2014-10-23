@@ -76,6 +76,7 @@ spotify.checkStatus = function(callback){
 Get all tracks info in playlist
 */
 spotify.getplaylistItems = function(song_id,callback){
+
   var html = '<ul>';
   for (var a in card.playing) {
     html+='<li><p></p><strong>playing...</strong></li>'
@@ -99,8 +100,7 @@ spotify.getplaylistItems = function(song_id,callback){
   }}
 
   html+= '</ul>'
-
-
-
-  callback(html);
+  if(html.trim().localeCompare(song_id.trim())===0){
+    setTimeout(function(){ spotify.getplaylistItems(song_id,callback) }, 3000);
+  }else{callback(html);}
 }

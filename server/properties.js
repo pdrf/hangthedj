@@ -4,5 +4,6 @@ global.card = {
             spotilocal:"",
             curPlaylist:[],
             oldPlaylist:[],
-            playing:[]
+            playing:[],
+            startPort: 4392 //backwords
             };
