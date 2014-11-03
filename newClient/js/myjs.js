@@ -30,10 +30,10 @@ $(function() {
 			})
 		}
 	})
-	$(".btn").click(function(event){
+	$(".add").click(function(event){
 		$(this).attr("disabled", true);
 		$.ajax({
-        	url: 'http://127.0.0.1:9999',
+        	url: '//192.168.1.2:9999',
         	type: "POST",
         	data: {
         	  'function': 'addMusic',
@@ -45,7 +45,11 @@ $(function() {
         	$('.searchBox').val('');
         	app.music = {};
         })
-	})
+	});
+	$(".refresh").click(function(event){
+		app.getPlaylist();
+	});
+	app.getPlaylist();
 });
 
 app.getResultJSON = function(data){
@@ -91,7 +95,7 @@ app.getTrack = function(id){
 		imghtml = '</div><img src="'+img.url+'" alt="Album Cover" style="padding:10px;width:'+img.width+'px;height:'+img.height+'px">';
 		$('#imageholder').append(imghtml);
 		$('#trackinfo').append(info);
-		$('.btn').show().removeAttr("disabled");
+		$('.add').show().removeAttr("disabled");
 		app.music = {
 			artist: artist,
 			music: music,
@@ -104,13 +108,14 @@ app.getTrack = function(id){
 
 app.getPlaylist = function(){
 		app.getPlaylistReq = $.ajax({
-       		url: 'http://127.0.0.1:9999',
+       		url: '//192.168.1.2:9999',
        		type: "POST",
        		data: {
        	  	'function': 'getplaylistItems',
        	  	'song_id': app.strcompare
        		}
        	}).done(function(strdata){
+       		$('.refresh').removeAttr("disabled");
        		var htmlStr = strdata.split('\n')[0];
        		app.clean();
 			$('#imageholder').append(htmlStr);
@@ -122,7 +127,7 @@ app.getPlaylist = function(){
 app.clean = function(){
 	$('#imageholder').empty();
 	$('#trackinfo').empty();
-	$('.btn').hide();
+	$('.add').hide();
 }
 
 app.jsload = function(){

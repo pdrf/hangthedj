@@ -20,6 +20,11 @@ body  {
 	width: 100%;
 }
 
+.playlistHead{
+  font: 20px 'archisticobold', arial, sans-serif;
+  color:#0C95F3;
+}
+
 @font-face {
     font-family: 'archisticobold';
     src: url('../fonts/Archistico_Bold-webfont.eot');
@@ -84,8 +89,20 @@ h1,h2,h3,h4{
 }
 
 /* start da css for da buttons */
-.btn {
+.add{
   display: none;
+  border-radius: 5px;
+  padding: 15px 25px;
+  font-size: 15px;
+  font-family: ‘Courier New’, Courier, monospace;
+  text-decoration: none;
+  margin: 20px;
+  color: #fff;
+  position: relative;
+  border-width: 3px;
+}
+
+.refresh{
   border-radius: 5px;
   padding: 15px 25px;
   font-size: 15px;

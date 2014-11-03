@@ -36,7 +36,7 @@ spotify.startSong = function(song_id, callback){
         spotify.checkStatus(function(statusPlaying) {
           if(statusPlaying===false){
             card.playing.pop();
-            card.oldPlaylist.push(old);
+            card.oldPlaylist.unshift(old);
             spotify.playNextTrack();
             clearInterval(check);
           }
@@ -76,27 +76,29 @@ spotify.checkStatus = function(callback){
 Get all tracks info in playlist
 */
 spotify.getplaylistItems = function(song_id,callback){
-
+  var playing = card.playing,
+  oldPlaylist = card.oldPlaylist,
+  curPlaylist = card.curPlaylist;
   var html = '<ul>';
-  for (var a in card.playing) {
-    html+='<li><p></p><strong>playing...</strong></li>'
-    if(card.playing.hasOwnProperty(a)) {
+  for (var a in playing) {
+    html+='<br><li class="playlistHead"><strong>playing...</strong></li>'
+    if(playing.hasOwnProperty(a)) {
       //html+='<li><img src="'+card.playing[a].smallimg.url+'" alt="'+card.playing[a].album+'" width="'+card.playing[a].smallimg.width+'px" height="'+card.playing[a].smallimg.height+'px">'+card.playing[a].music+' by '+card.playing[a].artist+' from '+card.playing[a].album+'</li>'
-      html+='<li>'+card.playing[a].music+' by '+card.playing[a].artist+' from '+card.playing[a].album+'</li>'
+      html+='<li>'+playing[a].music+' by '+playing[a].artist+'</li>'
 
   }}
-  for (var b in card.curPlaylist) {
-    if(card.curPlaylist.hasOwnProperty(b)) {
+  for (var b in curPlaylist) {
+    if(curPlaylist.hasOwnProperty(b)) {
       //html+='<li><img src="'+card.curPlaylist[b].smallimg.url+'" alt="'+card.curPlaylist[b].album+'" width="'+card.curPlaylist[b].smallimg.width+'px" height="'+card.curPlaylist[b].smallimg.height+'px">'+card.curPlaylist[b].music+' by '+card.curPlaylist[b].artist+' from '+card.curPlaylist[b].album+'</li>'
-      if(b == 0) { html+='<p></p><li><strong>next on playlist...</strong></li>' };
-      html+='<li>'+card.curPlaylist[b].music+' by '+card.curPlaylist[b].artist+' from '+card.curPlaylist[b].album+'</li>'
+      if(b == 0) { html+='<br><li class="playlistHead"><strong>next on playlist...</strong></li>' };
+      html+='<li>'+curPlaylist[b].music+' by '+curPlaylist[b].artist+'</li>'
 
   }}
-  for (var c in card.oldPlaylist) {
-    if(card.oldPlaylist.hasOwnProperty(c)) {
+  for (var c in oldPlaylist) {
+    if(oldPlaylist.hasOwnProperty(c) && c < 5) {
       //html+='<li><img src="'+card.oldPlaylist[c].smallimg.url+'" alt="'+card.oldPlaylist[c].album+'" width="'+card.oldPlaylist[c].smallimg.width+'px" height="'+card.oldPlaylist[c].smallimg.height+'px">'+card.oldPlaylist[c].music+' by '+card.oldPlaylist[c].artist+' from '+card.oldPlaylist[c].album+'</li>'
-      if(c == 0) { html+='<p></p><li><strong>played today...</strong></li>' };
-      html+='<li>'+card.oldPlaylist[c].music+' by '+card.oldPlaylist[c].artist+' from '+card.oldPlaylist[c].album+'</li>'
+      if(c == 0) { html+='<br><li class="playlistHead"><strong>last five played...</strong></li>' };
+      html+='<li>'+oldPlaylist[c].music+' by '+oldPlaylist[c].artist+'</li>'
   }}
 
   html+= '</ul>'

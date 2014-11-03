@@ -14,7 +14,6 @@ Creates and starts the server
 var server = http.createServer(
 	function(request, response ){
 		var origin = (request.headers.origin || "*");
-		console.log("PEDRO",origin, request.method.toUpperCase())
 		if (request.method.toUpperCase() === "OPTIONS"){
 			response.writeHead(
 				"204",
