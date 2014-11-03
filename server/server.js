@@ -14,6 +14,7 @@ Creates and starts the server
 var server = http.createServer(
 	function(request, response ){
 		var origin = (request.headers.origin || "*");
+		console.log("PEDRO",origin, request.method.toUpperCase())
 		if (request.method.toUpperCase() === "OPTIONS"){
 			response.writeHead(
 				"204",
@@ -84,6 +85,6 @@ var server = http.createServer(
 			});
 	});
 // Bind the server to port 8080.
-server.listen(9999, "127.0.0.1");
+server.listen(9999, "192.168.1.2");
 // Debugging:
-console.log( "Node.js listening on port 8080" );
+console.log( "Node.js listening on port 9999" );
