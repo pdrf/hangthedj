@@ -63,12 +63,14 @@ spotify.playNextTrack = function(){
 checks the player status
 */
 spotify.checkStatus = function(callback){
+  var bool = false;
   var authOptions = { 
       url: card.spotilocal+'/remote/status.json?csrf='+card.csrftoken+'&oauth='+card.oauth+'&cors=&ref=',
       json: true
     }
       request.get(authOptions, function(error, response) {
-      if(callback) callback(response.body.playing);
+      bool = (typeof(response.body)) ? bool = response.body.playing : false;
+      if(callback) callback(bool);
     })
 }
 

@@ -84,6 +84,6 @@ var server = http.createServer(
 			});
 	});
 // Bind the server to port 8080.
-server.listen(9999, "192.168.1.2");
+server.listen(9999, card.ip);
 // Debugging:
 console.log( "Node.js listening on port 9999" );

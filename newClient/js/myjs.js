@@ -31,9 +31,10 @@ $(function() {
 		}
 	})
 	$(".add").click(function(event){
+		var url = '//'+app.ip+':9999';
 		$(this).attr("disabled", true);
 		$.ajax({
-        	url: '//192.168.1.2:9999',
+        	url: url,
         	type: "POST",
         	data: {
         	  'function': 'addMusic',
@@ -107,8 +108,9 @@ app.getTrack = function(id){
 }
 
 app.getPlaylist = function(){
+	var url = '//'+app.ip+':9999';
 		app.getPlaylistReq = $.ajax({
-       		url: '//192.168.1.2:9999',
+       		url: url,
        		type: "POST",
        		data: {
        	  	'function': 'getplaylistItems',
@@ -134,6 +136,7 @@ app.jsload = function(){
 	document.body.style.visibility='visible';
 }
 
+app.ip = "192.168.1.2";
 app.music = {};
 app.strcompare = '';
 app.getPlaylistReq = '';
